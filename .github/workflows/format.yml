@@ -1,0 +1,23 @@
+name: Format code
+
+on:
+  push:
+    branches: [ shanzay ]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Format code with black
+        run: |
+          pip install black
+          black .
+          
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
